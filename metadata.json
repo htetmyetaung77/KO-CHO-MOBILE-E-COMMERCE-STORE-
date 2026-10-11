@@ -1,0 +1,6 @@
+{
+  "name": "TeleCommerce - Telegram E-Commerce Shop",
+  "description": "Telegram E-Commerce Shop & Bot Manager inspired by telegramecommerce.shop with product management, live orders, customer storefront, and Telegram checkout.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
