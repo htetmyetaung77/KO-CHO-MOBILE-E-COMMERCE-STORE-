@@ -132,12 +132,37 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const [paymentConfig, setPaymentConfig] = useState<PaymentConfig>(() => {
     const saved = localStorage.getItem('teleshop_payment_config');
-    return saved ? JSON.parse(saved) : DEFAULT_PAYMENT_CONFIG;
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed.kpayPhone?.includes('798') || parsed.kpayName?.includes('U KO CHO')) {
+          localStorage.setItem('teleshop_payment_config', JSON.stringify(DEFAULT_PAYMENT_CONFIG));
+          return DEFAULT_PAYMENT_CONFIG;
+        }
+        return { ...DEFAULT_PAYMENT_CONFIG, ...parsed, codEnabled: false };
+      } catch (e) {
+        return DEFAULT_PAYMENT_CONFIG;
+      }
+    }
+    return DEFAULT_PAYMENT_CONFIG;
   });
 
   const [settings, setSettings] = useState<ShopSettings>(() => {
     const saved = localStorage.getItem('teleshop_settings');
-    return saved ? JSON.parse(saved) : DEFAULT_SHOP_SETTINGS;
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed.supportPhone?.includes('798') || !parsed.supportPhone?.includes('779')) {
+          const updated = { ...DEFAULT_SHOP_SETTINGS, ...parsed, supportPhone: DEFAULT_SHOP_SETTINGS.supportPhone };
+          localStorage.setItem('teleshop_settings', JSON.stringify(updated));
+          return updated;
+        }
+        return { ...DEFAULT_SHOP_SETTINGS, ...parsed };
+      } catch (e) {
+        return DEFAULT_SHOP_SETTINGS;
+      }
+    }
+    return DEFAULT_SHOP_SETTINGS;
   });
 
   const [botCommands] = useState<BotCommand[]>(DEFAULT_BOT_COMMANDS);
@@ -154,7 +179,7 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
       id: 'msg-2',
       sender: 'bot',
       customerHandle: '@kyawswar_dev',
-      text: 'မင်္ဂလာပါ! iPhone 16 White 128GB အသင့်ရှိပါသည်ရှင်။ ဈေးနှုန်း 3,300,000 MMK ဖြစ်ပြီး ရန်ကုန်မြို့တွင်း အိမ်ရောက်ငွေချေ (COD) ရရှိပါသည်ရှင်။',
+      text: 'မင်္ဂလာပါ! iPhone 16 White 128GB အသင့်ရှိပါသည်ရှင်။ ဈေးနှုန်း 3,300,000 MMK ဖြစ်ပြီး KPay/WavePay ဖြင့် ငွေလွှဲမှာယူနိုင်ပါသည်ရှင်။ (⚠️ အိမ်ရောက်ငွေချေ မရသေးပါ)',
       time: '09:12 AM'
     },
     {
@@ -180,7 +205,34 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
   const [activeDrawerModal, setActiveDrawerModal] = useState<string | null>(null);
 
-  const [mode, setMode] = useState<'admin' | 'storefront'>('admin');
+  const [mode, setMode] = useState<'admin' | 'storefront'>(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('mode') === 'storefront' || params.get('mode') === 'buyer') {
+        return 'storefront';
+      }
+      const tg = (window as any).Telegram?.WebApp;
+      if (tg?.initData || window.location.hash.includes('tgWebAppData')) {
+        return 'storefront';
+      }
+    }
+    return 'admin';
+  });
+
+  // Telegram Mini App lifecycle hook
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const tg = (window as any).Telegram?.WebApp;
+      if (tg) {
+        try {
+          tg.ready?.();
+          tg.expand?.();
+        } catch (e) {
+          // ignore
+        }
+      }
+    }
+  }, []);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [isNewProductModalOpen, setIsNewProductModalOpen] = useState(false);
@@ -299,6 +351,17 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
       todayRevenue: prev.todayRevenue + newOrder.total
     }));
 
+    // Forward order notification directly to Telegram Bot API
+    try {
+      fetch('/api/bot/send-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ order: newOrder })
+      }).catch((e) => console.log('Telegram order notify non-blocking:', e));
+    } catch (e) {
+      // Non-blocking
+    }
+
     clearCart();
     return newOrder;
   };
@@ -383,9 +446,11 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
         let reply = 'မင်္ဂလာပါ! အော်ဒါများကို bot တွင် တိုက်ရိုက်မှာယူနိုင်ပါပြီ။ Admin မှ မကြာမီ ပြန်လည်ဖြေကြားပေးပါမည်။';
         const lower = text.toLowerCase();
         if (lower.includes('iphone') || lower.includes('phone') || lower.includes('ဖုန်း')) {
-          reply = 'iPhone 16 / iPhone 15 Pro ပစ္စည်းအသင့်ရှိပြီး 1 Year Warranty အပြည့်ပါဝင်ပါသည်ရှင်။ ရန်ကုန် / မန္တလေး အိမ်ရောက်ငွေချေ ရပါသည်!';
+          reply = 'iPhone 16 / iPhone 15 Pro ပစ္စည်းအသင့်ရှိပြီး 1 Year Warranty အပြည့်ပါဝင်ပါသည်ရှင်။ (⚠️ လောလောဆယ် အိမ်ရောက်ငွေချေ မရသေးပါ၊ KBZPay/WavePay ဖြင့် ငွေလွှဲပေးချေနိုင်ပါသည်ရှင်)';
+        } else if (lower.includes('cod') || lower.includes('အိမ်ရောက်')) {
+          reply = '⚠️ လောလောဆယ် အိမ်ရောက်ငွေချေ (Cash on Delivery) စနစ် မရသေးပါခင်ဗျာ။ KBZPay နှင့် WavePay ဖြင့် ငွေလွှဲ၍ စိတ်ချစွာ မှာယူနိုင်ပါသည်ရှင်။';
         } else if (lower.includes('kpay') || lower.includes('ငွေချေ')) {
-          reply = `KBZPay လက်ခံသော အကောင့်: ${paymentConfig.kpayPhone} (${paymentConfig.kpayName}) ဖြစ်ပါသည်ရှင်။`;
+          reply = `KBZPay လက်ခံသော အကောင့်: ${paymentConfig.kpayPhone} (${paymentConfig.kpayName}) ဖြစ်ပါသည်ရှင်။ (မှတ်ချက်: COD မရသေးပါ)`;
         }
         setChatMessages((prev) => [
           ...prev,

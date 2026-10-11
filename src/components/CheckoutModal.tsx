@@ -37,7 +37,7 @@ export const CheckoutModal: React.FC = () => {
   const [city, setCity] = useState('Yangon');
   const [address, setAddress] = useState('');
   const [notes, setNotes] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('cod');
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('kpay');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [completedOrder, setCompletedOrder] = useState<Order | null>(null);
   const [copied, setCopied] = useState(false);
@@ -307,7 +307,7 @@ export const CheckoutModal: React.FC = () => {
                     className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 text-xs font-medium"
                   >
                     <option value="Yangon">Yangon (Downtown & Townships) - 3,000 MMK</option>
-                    <option value="Mandalay">Mandalay (Express Delivery/COD) - 4,500 MMK</option>
+                    <option value="Mandalay">Mandalay (Express Gate Delivery) - 4,500 MMK</option>
                     <option value="Naypyidaw">Naypyidaw (Gate Delivery) - 5,500 MMK</option>
                     <option value="Bago">Bago - 4,000 MMK</option>
                     <option value="Taunggyi">Taunggyi (Shan State) - 6,000 MMK</option>
@@ -346,22 +346,29 @@ export const CheckoutModal: React.FC = () => {
             <div>
               <div className="flex items-center justify-between mb-2">
                 <h3 className="font-bold text-slate-900 flex items-center gap-1.5 text-xs">
-                  <CreditCard className="w-3.5 h-3.5 text-emerald-600" />
+                  <CreditCard className="w-3.5 h-3.5 text-[#5f2eea]" />
                   <span>3. Payment Method (ငွေပေးချေမှုစနစ်)</span>
                 </h3>
-                <span className="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-bold">
-                  အိမ်ရောက်ငွေချေ ရပါသည်
+                <span className="text-[10px] text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full font-bold">
+                  ⚠️ COD မရသေးပါ
+                </span>
+              </div>
+
+              {/* Notice that Cash on delivery is not available yet */}
+              <div className="mb-2 p-2.5 rounded-xl bg-amber-50/80 border border-amber-200 text-[11px] text-amber-900 flex items-center gap-2">
+                <span className="text-sm">⚠️</span>
+                <span>
+                  <strong>လောလောဆယ် အိမ်ရောက်ငွေချေ (COD) မရသေးပါ။</strong> KBZPay သို့မဟုတ် WavePay ဖြင့် ငွေလွှဲပေးချေနိုင်ပါသည်ခင်ဗျာ။
                 </span>
               </div>
 
               <div className="grid grid-cols-3 gap-2">
                 {[
-                  { id: 'cod', name: 'Cash on Del', mmk: 'အိမ်ရောက်ငွေချေ', badge: 'Recommended' },
-                  { id: 'kpay', name: 'KBZPay', mmk: 'KPay လွှဲမည်', badge: 'Popular' },
-                  { id: 'wavepay', name: 'WavePay', mmk: 'WavePay', badge: 'Instant' }
+                  { id: 'kpay', name: 'KBZPay', mmk: 'KPay လွှဲမည်', badge: 'Recommended', available: true },
+                  { id: 'wavepay', name: 'WavePay', mmk: 'WavePay', badge: 'Instant', available: true },
+                  { id: 'cbpay', name: 'CB Bank', mmk: 'CB Bank', badge: 'Bank Pay', available: true }
                 ].map((p) => {
                   const isSelected = paymentMethod === p.id;
-                  const isCod = p.id === 'cod';
                   return (
                     <button
                       type="button"
@@ -369,9 +376,7 @@ export const CheckoutModal: React.FC = () => {
                       onClick={() => setPaymentMethod(p.id as PaymentMethod)}
                       className={`p-2.5 rounded-2xl border text-center transition-all flex flex-col items-center justify-center gap-1 ${
                         isSelected
-                          ? isCod
-                            ? 'border-emerald-500 bg-emerald-50 text-emerald-800 shadow-xs ring-1 ring-emerald-500'
-                            : 'border-[#5f2eea] bg-purple-50/80 text-[#5f2eea] shadow-2xs'
+                          ? 'border-[#5f2eea] bg-purple-50/80 text-[#5f2eea] shadow-xs ring-1 ring-[#5f2eea]'
                           : 'border-slate-200 text-slate-700 hover:bg-slate-50'
                       }`}
                     >
@@ -379,35 +384,13 @@ export const CheckoutModal: React.FC = () => {
                       <span className="text-[9px] font-bold text-slate-600 leading-none">
                         {p.mmk}
                       </span>
-                      <span
-                        className={`text-[8px] font-bold px-1.5 py-0.2 rounded border ${
-                          isCod
-                            ? 'bg-emerald-600 text-white border-emerald-600'
-                            : 'bg-white text-slate-500 border-slate-200'
-                        }`}
-                      >
+                      <span className="text-[8px] font-bold px-1.5 py-0.2 rounded border bg-white text-purple-700 border-purple-200">
                         {p.badge}
                       </span>
                     </button>
                   );
                 })}
               </div>
-
-              {/* Cash on Delivery Notice (Prominent) */}
-              {paymentMethod === 'cod' && (
-                <div className="mt-2.5 p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-[11px] text-emerald-900 space-y-1">
-                  <div className="flex items-center gap-1.5 font-black text-emerald-800">
-                    <Truck className="w-4 h-4 text-emerald-600" />
-                    <span>🚚 အိမ်ရောက်ငွေချေ (Cash on Delivery) အာမခံ</span>
-                  </div>
-                  <p className="text-[11px] text-emerald-800 leading-relaxed">
-                    ကြိုတင်ငွေလွှဲရန် မလိုပါ။ ပစ္စည်းကို အိမ်အရောက်ပို့ဆောင်ပေးပြီး စစ်ဆေးပြီးမှ ငွေချေနိုင်ပါသည်ရှင်။
-                  </p>
-                  <div className="text-[10px] text-emerald-700 font-semibold pt-0.5">
-                    ✅ ရန်ကုန် / မန္တလေး မြို့တွင်း အိမ်အရောက်ငွေချေ စိတ်ချစွာမှာယူနိုင်ပါသည်။
-                  </div>
-                </div>
-              )}
 
               {/* Payment Details Box for KBZPay */}
               {paymentMethod === 'kpay' && (
@@ -427,7 +410,7 @@ export const CheckoutModal: React.FC = () => {
                     </div>
                   </div>
                   <p className="text-[10px] text-blue-700 leading-tight">
-                    * Please upload slip or screenshot in Telegram chat after ordering.
+                    * ငွေလွှဲပြီးပါက screenshot ပြေစာအား Telegram chat တွင် ပေးပို့ပေးပါရန်။
                   </p>
                 </div>
               )}
@@ -447,6 +430,29 @@ export const CheckoutModal: React.FC = () => {
                     </div>
                     <div>
                       Account Name: <span className="font-bold">{paymentConfig.waveName}</span>
+                    </div>
+                  </div>
+                  <p className="text-[10px] text-amber-700 leading-tight">
+                    * WavePay ဖြင့် အလွယ်တကူငွေလွှဲနိုင်ပါသည်။
+                  </p>
+                </div>
+              )}
+
+              {/* Payment Details Box for CB Bank */}
+              {paymentMethod === 'cbpay' && (
+                <div className="mt-2.5 p-3 rounded-2xl bg-emerald-50 border border-emerald-200 text-[11px] space-y-1.5">
+                  <div className="flex items-center justify-between text-emerald-900 font-bold">
+                    <span>CB Bank Account:</span>
+                    <span className="text-[10px] bg-emerald-600 text-white px-1.5 py-0.2 rounded font-semibold">
+                      Direct
+                    </span>
+                  </div>
+                  <div className="text-slate-700">
+                    <div>
+                      Account No: <span className="font-mono font-bold text-emerald-900">{paymentConfig.cbAccount}</span>
+                    </div>
+                    <div>
+                      Account Name: <span className="font-bold">{paymentConfig.cbName}</span>
                     </div>
                   </div>
                 </div>
@@ -476,25 +482,14 @@ export const CheckoutModal: React.FC = () => {
             </div>
 
             {/* Submit Action */}
-            {paymentMethod === 'cod' ? (
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs shadow-md shadow-emerald-600/30 transition-all flex items-center justify-center gap-2 active:scale-98 disabled:opacity-50"
-              >
-                <Truck className="w-4 h-4 stroke-[2.4]" />
-                <span>🚚 အိမ်ရောက်ငွေချေဖြင့် အော်ဒါတင်မည် (Confirm COD Order)</span>
-              </button>
-            ) : (
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full py-3.5 px-4 rounded-xl bg-[#5f2eea] hover:bg-[#5024cf] text-white font-bold text-xs shadow-md shadow-purple-600/30 transition-all flex items-center justify-center gap-2 active:scale-98 disabled:opacity-50"
-              >
-                <Send className="w-4 h-4 stroke-[2.4]" />
-                <span>Complete Order & Send via Telegram</span>
-              </button>
-            )}
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full py-3.5 px-4 rounded-xl bg-[#5f2eea] hover:bg-[#5024cf] text-white font-bold text-xs shadow-md shadow-purple-600/30 transition-all flex items-center justify-center gap-2 active:scale-98 disabled:opacity-50"
+            >
+              <Send className="w-4 h-4 stroke-[2.4]" />
+              <span>အော်ဒါတင်ပြီး Telegram သို့ ပို့မည် (Complete Order)</span>
+            </button>
           </form>
         )}
       </div>

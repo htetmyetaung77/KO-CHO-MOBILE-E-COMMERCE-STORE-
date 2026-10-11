@@ -8,16 +8,23 @@ import {
   Save,
   RotateCcw,
   Check,
-  Send
+  Send,
+  Phone,
+  CreditCard
 } from 'lucide-react';
 import { useShop } from '../context/ShopContext';
 
 export const SettingsView: React.FC = () => {
-  const { settings, updateSettings } = useShop();
+  const { settings, updateSettings, paymentConfig, updatePaymentConfig } = useShop();
 
   const [shopName, setShopName] = useState(settings.shopName);
+  const [supportPhone, setSupportPhone] = useState(settings.supportPhone || '09 779 944 100');
   const [botUsername, setBotUsername] = useState(settings.botUsername);
   const [adminTelegram, setAdminTelegram] = useState(settings.adminTelegram);
+  const [kpayPhone, setKpayPhone] = useState(paymentConfig.kpayPhone || '09 776 111 116');
+  const [kpayName, setKpayName] = useState(paymentConfig.kpayName || 'Hla Phone Thu');
+  const [wavePhone, setWavePhone] = useState(paymentConfig.wavePhone || '09 776 111 116');
+  const [waveName, setWaveName] = useState(paymentConfig.waveName || 'Hla Phone Thu');
   const [currency, setCurrency] = useState<'MMK' | 'USD'>(settings.currency);
   const [exchangeRate, setExchangeRate] = useState(settings.exchangeRate);
   const [autoBotReply, setAutoBotReply] = useState(settings.autoBotReply);
@@ -28,6 +35,7 @@ export const SettingsView: React.FC = () => {
     e.preventDefault();
     updateSettings({
       shopName: shopName.trim(),
+      supportPhone: supportPhone.trim(),
       botUsername: botUsername.trim(),
       adminTelegram: adminTelegram.trim(),
       currency,
@@ -35,6 +43,15 @@ export const SettingsView: React.FC = () => {
       autoBotReply,
       welcomeMessage: welcomeMessage.trim()
     });
+
+    updatePaymentConfig({
+      kpayPhone: kpayPhone.trim(),
+      kpayName: kpayName.trim(),
+      wavePhone: wavePhone.trim(),
+      waveName: waveName.trim(),
+      codEnabled: false
+    });
+
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };
@@ -54,7 +71,7 @@ export const SettingsView: React.FC = () => {
           <h2 className="text-sm font-extrabold text-slate-900">Shop & Bot Configuration</h2>
         </div>
         <p className="text-[11px] text-slate-500 mt-1">
-          Configure your Telegram bot username, store currency, payment details, and automation.
+          Configure your Telegram bot username, Hotline, payment transfer accounts, and automation.
         </p>
       </div>
 
@@ -63,17 +80,29 @@ export const SettingsView: React.FC = () => {
         <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-2xs space-y-3">
           <h3 className="font-bold text-slate-900 flex items-center gap-1.5 text-xs">
             <Store className="w-4 h-4 text-[#5f2eea]" />
-            <span>Storefront Profile</span>
+            <span>Storefront Profile & Contact</span>
           </h3>
 
-          <div>
-            <label className="block text-slate-600 mb-1 font-medium">Shop Brand Name</label>
-            <input
-              type="text"
-              value={shopName}
-              onChange={(e) => setShopName(e.target.value)}
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 text-xs font-bold"
-            />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div>
+              <label className="block text-slate-600 mb-1 font-medium">Shop Brand Name</label>
+              <input
+                type="text"
+                value={shopName}
+                onChange={(e) => setShopName(e.target.value)}
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 text-xs font-bold"
+              />
+            </div>
+            <div>
+              <label className="block text-slate-600 mb-1 font-medium">📞 Hotline / Support Phone</label>
+              <input
+                type="text"
+                value={supportPhone}
+                onChange={(e) => setSupportPhone(e.target.value)}
+                placeholder="09 779 944 100"
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 text-xs font-mono font-bold text-purple-700"
+              />
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-2">
@@ -93,9 +122,74 @@ export const SettingsView: React.FC = () => {
                 type="text"
                 value={adminTelegram}
                 onChange={(e) => setAdminTelegram(e.target.value)}
-                placeholder="@kocho_admin"
+                placeholder="@player-00h"
                 className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 text-xs font-mono"
               />
+            </div>
+          </div>
+        </div>
+
+        {/* Payment Accounts */}
+        <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-2xs space-y-3">
+          <div className="flex items-center justify-between">
+            <h3 className="font-bold text-slate-900 flex items-center gap-1.5 text-xs">
+              <CreditCard className="w-4 h-4 text-blue-600" />
+              <span>Payment Accounts (KPay & WavePay)</span>
+            </h3>
+            <span className="text-[10px] bg-amber-50 text-amber-700 px-2 py-0.5 rounded-full border border-amber-200 font-semibold">
+              ⚠️ COD မရသေးပါ
+            </span>
+          </div>
+
+          <div className="p-3 bg-blue-50/60 rounded-xl border border-blue-100 space-y-2">
+            <span className="font-bold text-blue-900 text-[11px] block">🔹 KBZPay Account</span>
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <label className="block text-slate-600 mb-1 text-[11px]">KPay Phone Number</label>
+                <input
+                  type="text"
+                  value={kpayPhone}
+                  onChange={(e) => setKpayPhone(e.target.value)}
+                  placeholder="09 776 111 116"
+                  className="w-full px-3 py-1.5 bg-white border border-blue-200 rounded-lg text-slate-800 text-xs font-mono font-bold"
+                />
+              </div>
+              <div>
+                <label className="block text-slate-600 mb-1 text-[11px]">Account Name</label>
+                <input
+                  type="text"
+                  value={kpayName}
+                  onChange={(e) => setKpayName(e.target.value)}
+                  placeholder="Hla Phone Thu"
+                  className="w-full px-3 py-1.5 bg-white border border-blue-200 rounded-lg text-slate-800 text-xs font-bold"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="p-3 bg-amber-50/60 rounded-xl border border-amber-100 space-y-2">
+            <span className="font-bold text-amber-900 text-[11px] block">🔹 WavePay Account</span>
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <label className="block text-slate-600 mb-1 text-[11px]">WavePay Phone Number</label>
+                <input
+                  type="text"
+                  value={wavePhone}
+                  onChange={(e) => setWavePhone(e.target.value)}
+                  placeholder="09 776 111 116"
+                  className="w-full px-3 py-1.5 bg-white border border-amber-200 rounded-lg text-slate-800 text-xs font-mono font-bold"
+                />
+              </div>
+              <div>
+                <label className="block text-slate-600 mb-1 text-[11px]">Account Name</label>
+                <input
+                  type="text"
+                  value={waveName}
+                  onChange={(e) => setWaveName(e.target.value)}
+                  placeholder="Hla Phone Thu"
+                  className="w-full px-3 py-1.5 bg-white border border-amber-200 rounded-lg text-slate-800 text-xs font-bold"
+                />
+              </div>
             </div>
           </div>
         </div>

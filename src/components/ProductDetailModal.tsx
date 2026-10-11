@@ -8,7 +8,8 @@ import {
   Truck,
   RotateCcw,
   Copy,
-  CheckCheck
+  CheckCheck,
+  CreditCard
 } from 'lucide-react';
 import { useShop } from '../context/ShopContext';
 
@@ -42,7 +43,7 @@ export const ProductDetailModal: React.FC = () => {
     setIsCartOpen(true);
   };
 
-  const handleCashOnDelivery = () => {
+  const handleInstantBuy = () => {
     addToCart(product, quantity, currentColor, currentStorage);
     setSelectedProductDetail(null);
     setIsCheckoutOpen(true);
@@ -243,7 +244,7 @@ export const ProductDetailModal: React.FC = () => {
             </div>
             <div className="p-2 bg-slate-50 rounded-xl flex flex-col items-center gap-1">
               <Truck className="w-4 h-4 text-blue-600" />
-              <span className="font-semibold">Fast Gate/COD</span>
+              <span className="font-semibold">Express Gate</span>
             </div>
             <div className="p-2 bg-slate-50 rounded-xl flex flex-col items-center gap-1">
               <RotateCcw className="w-4 h-4 text-purple-600" />
@@ -254,14 +255,18 @@ export const ProductDetailModal: React.FC = () => {
 
         {/* Modal Bottom Buy Actions */}
         <div className="p-4 bg-slate-50 border-t border-slate-100 space-y-2">
-          {/* Instant Cash on Delivery Button */}
+          {/* Instant Order Button */}
           <button
-            onClick={handleCashOnDelivery}
-            className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold shadow-md shadow-emerald-600/20 transition-all flex items-center justify-center gap-2 active:scale-98"
+            onClick={handleInstantBuy}
+            className="w-full py-3 px-4 rounded-xl bg-[#5f2eea] hover:bg-[#5024cf] text-white font-extrabold shadow-md shadow-purple-600/20 transition-all flex items-center justify-center gap-2 active:scale-98"
           >
-            <Truck className="w-4 h-4 stroke-[2.4]" />
-            <span>🚚 အိမ်ရောက်ငွေချေ (Cash on Delivery) မှာယူမည်</span>
+            <CreditCard className="w-4 h-4 stroke-[2.4]" />
+            <span>💳 အော်ဒါတင်မည် (KPay / WavePay ဖြင့် ငွေလွှဲမှာယူမည်)</span>
           </button>
+
+          <div className="text-center text-[10px] text-amber-800 font-medium bg-amber-50 py-1 px-2 rounded-lg border border-amber-200">
+            ⚠️ လောလောဆယ် အိမ်ရောက်ငွေချေ (COD) မရသေးပါ။ KPay / WavePay ဖြင့် ငွေလွှဲပေးချေနိုင်ပါသည်။
+          </div>
 
           <div className="flex gap-2">
             {/* Add to Cart */}

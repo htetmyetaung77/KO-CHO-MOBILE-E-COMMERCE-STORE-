@@ -449,7 +449,7 @@ export const CustomizationView: React.FC = () => {
                 type="text"
                 placeholder={
                   activeSocialTab === 'phone'
-                    ? 'Phone number (e.g. 09 798 442 190)'
+                    ? 'Phone number (e.g. 09 779 944 100)'
                     : activeSocialTab === 'telegram'
                     ? '@username'
                     : 'URL link...'

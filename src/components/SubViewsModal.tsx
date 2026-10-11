@@ -384,7 +384,12 @@ export const SubViewsModal: React.FC = () => {
                     onChange={(e) => updatePaymentConfig({ codEnabled: e.target.checked })}
                     className="w-4 h-4 text-[#5f2eea] rounded"
                   />
-                  <span>Cash on Delivery (COD) Enabled</span>
+                  <div>
+                    <span className="font-semibold">Cash on Delivery (COD)</span>
+                    <span className="ml-1.5 text-[10px] text-amber-800 bg-amber-100 px-1.5 py-0.2 rounded font-bold">
+                      {paymentConfig.codEnabled ? 'Active' : '⚠️ လောလောဆယ် မရသေးပါ (Disabled)'}
+                    </span>
+                  </div>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input

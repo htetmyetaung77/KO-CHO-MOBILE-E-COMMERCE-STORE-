@@ -105,8 +105,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         <div className="flex items-center justify-between pt-1 border-t border-slate-100 text-[11px] text-slate-500">
           <div className="flex items-center gap-1.5 truncate max-w-[140px]">
-            <span className="text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-black whitespace-nowrap">
-              COD ရ
+            <span className="text-[10px] text-purple-700 bg-purple-50 px-1.5 py-0.5 rounded font-bold whitespace-nowrap">
+              KPay/WavePay
             </span>
             <span className="truncate uppercase text-[10px] font-semibold text-slate-400">
               {product.category}

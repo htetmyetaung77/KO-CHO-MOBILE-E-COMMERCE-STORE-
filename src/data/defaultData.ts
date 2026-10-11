@@ -11,7 +11,7 @@ export const DEFAULT_PRODUCTS: Product[] = [
     inStock: true,
     stockCount: 5,
     image: '/src/assets/images/product_iphone_15_pro_box_1791651995091.jpg',
-    description: 'iPhone 16 Pro Max 256Gb CH/A, Battery Health 93% (Desert Titanium) ဘူးစုံ အလုံးသန့်။ Official 1 Year Warranty အာမခံပါဝင်။ အိမ်ရောက်ငွေချေ (COD) ရရှိပါသည်။',
+    description: 'iPhone 16 Pro Max 256Gb CH/A, Battery Health 93% (Desert Titanium) ဘူးစုံ အလုံးသန့်။ Official 1 Year Warranty အာမခံပါဝင်။ (⚠️ လောလောဆယ် အိမ်ရောက်ငွေချေ မရသေးပါ၊ KBZPay/WavePay ဖြင့် ငွေလွှဲပေးချေနိုင်ပါသည်)',
     colors: ['Desert Titanium'],
     storage: ['256GB'],
     specs: {
@@ -19,7 +19,7 @@ export const DEFAULT_PRODUCTS: Product[] = [
       Storage: '256GB',
       Battery: '93% Battery Health',
       Condition: 'ဘူးစုံ Original 99% Like New',
-      Delivery: 'အိမ်ရောက်ငွေချေ (COD) ရရှိပါသည်'
+      Payment: 'KPay / WavePay ငွေလွှဲ (COD မရသေးပါ)'
     },
     createdAt: '2026-10-10'
   },
@@ -32,7 +32,7 @@ export const DEFAULT_PRODUCTS: Product[] = [
     inStock: true,
     stockCount: 8,
     image: '/src/assets/images/product_iphone_16_white_1791651983874.jpg',
-    description: 'iPhone 16 128Gb HN/A, Battery Health 96% (White) ဘူးစုံ Apple Warranty 1 month ကျန်။ ရန်ကုန်/မန္တလေး အိမ်ရောက်ငွေချေ (COD) ရရှိပါသည်။',
+    description: 'iPhone 16 128Gb HN/A, Battery Health 96% (White) ဘူးစုံ Apple Warranty 1 month ကျန်။ (⚠️ လောလောဆယ် အိမ်ရောက်ငွေချေ မရသေးပါ၊ KBZPay/WavePay ဖြင့် ငွေလွှဲပေးချေနိုင်ပါသည်)',
     colors: ['White'],
     storage: ['128GB'],
     specs: {
@@ -40,7 +40,7 @@ export const DEFAULT_PRODUCTS: Product[] = [
       Storage: '128GB',
       Battery: '96% Battery Health',
       Warranty: 'Apple Warranty 1 month left',
-      Delivery: 'COD အိမ်ရောက်ငွေချေ ရပါသည်'
+      Payment: 'KPay / WavePay ငွေလွှဲ (COD မရပါ)'
     },
     createdAt: '2026-10-10'
   },
@@ -53,7 +53,7 @@ export const DEFAULT_PRODUCTS: Product[] = [
     inStock: true,
     stockCount: 6,
     image: '/src/assets/images/product_iphone_15_pro_box_1791651995091.jpg',
-    description: 'iPhone 15 Pro 128Gb ZP/A, Battery Health 88% (Natural Titanium) ဘူးစုံ အလုံးသန့်။ အိမ်ရောက်ငွေချေ (COD) ရရှိပါသည်။',
+    description: 'iPhone 15 Pro 128Gb ZP/A, Battery Health 88% (Natural Titanium) ဘူးစုံ အလုံးသန့်။ (⚠️ လောလောဆယ် အိမ်ရောက်ငွေချေ မရသေးပါ၊ KBZPay/WavePay ဖြင့် ငွေလွှဲပေးချေနိုင်ပါသည်)',
     colors: ['Natural Titanium'],
     storage: ['128GB'],
     specs: {
@@ -61,7 +61,7 @@ export const DEFAULT_PRODUCTS: Product[] = [
       Storage: '128GB',
       Battery: '88% Battery Health',
       Condition: 'ဘူးစုံ Original 99%',
-      Delivery: 'COD အိမ်ရောက်ငွေချေ ရပါသည်'
+      Payment: 'KPay / WavePay ငွေလွှဲ (COD မရပါ)'
     },
     createdAt: '2026-10-09'
   },
@@ -74,14 +74,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     inStock: true,
     stockCount: 4,
     image: '/src/assets/images/product_iphone_16_white_1791651983874.jpg',
-    description: 'iPhone 15 Plus 128Gb CH/A, Battery Health 87% (Pink) Original အလုံးဘူးစုံ။ အိမ်ရောက်ငွေချေ (COD) ရရှိပါသည်။',
+    description: 'iPhone 15 Plus 128Gb CH/A, Battery Health 87% (Pink) Original အလုံးဘူးစုံ။ (⚠️ လောလောဆယ် အိမ်ရောက်ငွေချေ မရသေးပါ၊ KBZPay/WavePay ဖြင့် ငွေလွှဲပေးချေနိုင်ပါသည်)',
     colors: ['Pink'],
     storage: ['128GB'],
     specs: {
       Model: 'iPhone 15 Plus (CH/A)',
       Storage: '128GB',
       Battery: '87% Battery Health',
-      Delivery: 'COD ရရှိပါသည်'
+      Payment: 'KPay / WavePay ငွေလွှဲ (COD မရပါ)'
     },
     createdAt: '2026-10-09'
   },
@@ -94,13 +94,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     inStock: true,
     stockCount: 7,
     image: '/src/assets/images/product_iphone_15_pro_box_1791651995091.jpg',
-    description: 'iPhone 11 Pro 256Gb KH/A, Battery Health 92% (Space Gray) ဘူးစုံ အလုံးသန့်။ COD အိမ်ရောက်ငွေချေ ရပါသည်!',
+    description: 'iPhone 11 Pro 256Gb KH/A, Battery Health 92% (Space Gray) ဘူးစုံ အလုံးသန့်။ (⚠️ လောလောဆယ် အိမ်ရောက်ငွေချေ မရသေးပါ၊ KBZPay/WavePay ဖြင့် ငွေလွှဲပေးချေနိုင်ပါသည်)',
     colors: ['Space Gray'],
     storage: ['256GB'],
     specs: {
       Model: 'iPhone 11 Pro (KH/A)',
       Battery: '92% Battery Health',
-      Storage: '256GB'
+      Storage: '256GB',
+      Payment: 'KPay / WavePay ငွေလွှဲ (COD မရပါ)'
     },
     createdAt: '2026-10-08'
   },
@@ -113,13 +114,14 @@ export const DEFAULT_PRODUCTS: Product[] = [
     inStock: true,
     stockCount: 5,
     image: '/src/assets/images/product_iphone_15_pro_box_1791651995091.jpg',
-    description: 'iPhone 11 Pro 64Gb ZP/A, Battery Health 90% (Midnight Green) ဘူးစုံ။ COD အိမ်ရောက်ငွေချေ ရပါသည်!',
+    description: 'iPhone 11 Pro 64Gb ZP/A, Battery Health 90% (Midnight Green) ဘူးစုံ။ (⚠️ လောလောဆယ် အိမ်ရောက်ငွေချေ မရသေးပါ၊ KBZPay/WavePay ဖြင့် ငွေလွှဲပေးချေနိုင်ပါသည်)',
     colors: ['Midnight Green'],
     storage: ['64GB'],
     specs: {
       Model: 'iPhone 11 Pro (ZP/A)',
       Battery: '90% Battery Health',
-      Storage: '64GB'
+      Storage: '64GB',
+      Payment: 'KPay / WavePay ငွေလွှဲ (COD မရပါ)'
     },
     createdAt: '2026-10-08'
   },
@@ -600,10 +602,10 @@ export const DEFAULT_ORDERS: Order[] = [
     deliveryFee: 3000,
     discount: 50000,
     total: 3253000,
-    paymentMethod: 'cod',
-    paymentStatus: 'pending',
+    paymentMethod: 'kpay',
+    paymentStatus: 'paid',
     status: 'processing',
-    notes: 'အိမ်ရောက်ငွေချေ (COD) ဖြင့် မှာယူထားပါသည်။ ပစ္စည်းမပို့မီ ဖုန်းကြိုဆက်ပေးပါ။',
+    notes: 'KBZPay ဖြင့် ငွေလွှဲထားပြီးပါပြီ။ ပြေစာ screenshot ပို့ပြီး။',
     createdAt: '2026-10-10 09:15'
   },
   {
@@ -626,10 +628,10 @@ export const DEFAULT_ORDERS: Order[] = [
     deliveryFee: 4500,
     discount: 0,
     total: 3254500,
-    paymentMethod: 'cod',
-    paymentStatus: 'pending',
+    paymentMethod: 'wavepay',
+    paymentStatus: 'paid',
     status: 'confirmed',
-    notes: 'မန္တလေးမြို့တွင်း အိမ်ရောက်ငွေချေ (COD)',
+    notes: 'WavePay ဖြင့် ငွေလွှဲပေးချေထားပါသည်။',
     createdAt: '2026-10-09 18:40'
   }
 ];
@@ -692,42 +694,42 @@ export const DEFAULT_CUSTOMERS: CustomerUser[] = [
 export const DEFAULT_DELIVERY_ZONES: DeliveryZone[] = [
   {
     id: 'del-1',
-    name: 'Yangon (Downtown & Inner Townships) — COD ရရှိပါသည်',
+    name: 'Yangon (Downtown & Inner Townships) — KPay/WavePay ကြိုတင်ငွေလွှဲ',
     fee: 3000,
-    estimatedTime: 'Same Day / Next Day Delivery (COD)',
+    estimatedTime: 'Same Day / Next Day Delivery (COD မရပါ)',
     freeThreshold: 1000000
   },
   {
     id: 'del-2',
-    name: 'Yangon (Outer Townships) — COD ရရှိပါသည်',
+    name: 'Yangon (Outer Townships) — KPay/WavePay ကြိုတင်ငွေလွှဲ',
     fee: 4000,
-    estimatedTime: '1 - 2 Business Days (COD)',
+    estimatedTime: '1 - 2 Business Days (COD မရပါ)',
     freeThreshold: 1500000
   },
   {
     id: 'del-3',
-    name: 'Mandalay City — COD ရရှိပါသည်',
+    name: 'Mandalay City — KPay/WavePay ကြိုတင်ငွေလွှဲ',
     fee: 4500,
-    estimatedTime: '1 - 2 Days Express Gate / COD',
+    estimatedTime: '1 - 2 Days Express Gate / ကားဂိတ်',
     freeThreshold: 2000000
   },
   {
     id: 'del-4',
-    name: 'Naypyidaw & Other Major Cities — COD ရရှိပါသည်',
+    name: 'Naypyidaw & Other Major Cities — KPay/WavePay ကြိုတင်ငွေလွှဲ',
     fee: 5500,
-    estimatedTime: '2 - 3 Days via Royal Express / Gate (COD)',
+    estimatedTime: '2 - 3 Days via Royal Express / Gate',
     freeThreshold: 2500000
   }
 ];
 
 export const DEFAULT_PAYMENT_CONFIG: PaymentConfig = {
-  kpayPhone: '09 798 442 190',
-  kpayName: 'U KO CHO (KO CHO MOBILE)',
-  wavePhone: '09 798 442 190',
-  waveName: 'U KO CHO',
+  kpayPhone: '09 776 111 116',
+  kpayName: 'Hla Phone Thu',
+  wavePhone: '09 776 111 116',
+  waveName: 'Hla Phone Thu',
   cbAccount: '0012 6001 8920 1201',
-  cbName: 'KO CHO MOBILE SHOP',
-  codEnabled: true,
+  cbName: 'Hla Phone Thu',
+  codEnabled: false,
   starsEnabled: true
 };
 
@@ -739,13 +741,13 @@ export const DEFAULT_SHOP_SETTINGS: ShopSettings = {
   channelUsername: '@kocho_mobile_official',
   adminTelegram: '@player-00h',
   adminChatId: '8927464164',
-  supportPhone: '09 798 442 190',
+  supportPhone: '09 779 944 100',
   currency: 'MMK',
   exchangeRate: 4600, // 1 USD = 4,600 MMK
   language: 'my',
   todayRevenue: 3300000,
   autoBotReply: true,
-  welcomeMessage: 'မင်္ဂလာပါရှင်! KO CHO MOBILE E-commerce Store မှ ကြိုဆိုပါတယ်။ ဖုန်းနှင့် အီလက်ထရောနစ်ပစ္စည်းများကို ဈေးနှုန်းမှန်ကန်စွာဖြင့် စိတ်ချလက်ချ မှာယူနိုင်ပါပြီ။ အိမ်ရောက်ငွေချေ (COD) ရရှိပါသည်။'
+  welcomeMessage: 'မင်္ဂလာပါရှင်! KO CHO MOBILE E-commerce Store မှ ကြိုဆိုပါတယ်။ ဖုန်းနှင့် အီလက်ထရောနစ်ပစ္စည်းများကို ဈေးနှုန်းမှန်ကန်စွာဖြင့် စိတ်ချလက်ချ မှာယူနိုင်ပါပြီ။ (⚠️ သတိပြုရန် - လောလောဆယ် အိမ်ရောက်ငွေချေ မရသေးပါ၊ KBZPay/WavePay ဖြင့် ငွေလွှဲပေးချေနိုင်ပါသည်)'
 };
 
 export const DEFAULT_CUSTOMIZATION: CustomizationConfig = {
@@ -756,22 +758,23 @@ export const DEFAULT_CUSTOMIZATION: CustomizationConfig = {
   currency: 'MMK',
   shopBanners: ['/src/assets/images/hero_ecommerce_showcase_1791651826248.jpg'],
   socialLinks: [
-    { id: 'soc-1', platform: 'phone', value: '09 798 442 190', label: 'Hotline 1' },
+    { id: 'soc-1', platform: 'phone', value: '09 779 944 100', label: 'Hotline: 09 779 944 100' },
     { id: 'soc-2', platform: 'telegram', value: '@kocho_mobile_service_bot', label: 'Telegram Bot' },
     { id: 'soc-3', platform: 'facebook', value: 'fb.com/kocho.mobile.store', label: 'Official Page' }
   ],
   aiAgent: {
     enabled: true,
     gender: 'male',
-    customPrompt: 'ဝယ်ရင်စိတ်ချရပြီး... ရောင်းရင်ဈေးကောင်းရမယ့် KO CHO MOBILE E-commerce Store မှ ကြိုဆိုပါတယ်။ ဖုန်းအသစ်များနှင့် ဒစ်ဂျစ်တယ်ပစ္စည်းများကို စိတ်ချစွာမှာယူနိုင်ပါသည်။ အိမ်ရောက်ငွေချေ (COD) ရရှိပါသည်။',
+    customPrompt: 'ဝယ်ရင်စိတ်ချရပြီး... ရောင်းရင်ဈေးကောင်းရမယ့် KO CHO MOBILE E-commerce Store မှ ကြိုဆိုပါတယ်။ ဖုန်းအသစ်များနှင့် ဒစ်ဂျစ်တယ်ပစ္စည်းများကို စိတ်ချစွာမှာယူနိုင်ပါသည်။ (⚠️ သတိပြုရန် - လောလောဆယ် အိမ်ရောက်ငွေချေ မရသေးပါ၊ KBZPay / WavePay: 09 776 111 116 (Hla Phone Thu) ဖြင့် ငွေလွှဲပေးချေနိုင်ပါသည်)',
     quickQuestions: [
       'အိမ်ရောက်ငွေချေ (COD) ရပါသလား?',
-      'iPhone 16 ဈေးနှုန်းဘယ်လောက်လဲ?',
-      'KPay အကောင့်နံပါတ်ပေးပါ'
+      'ငွေလွှဲအကောင့်နံပါတ်ပေးပါ',
+      'ဆက်သွယ်ရန် Hotline ဘယ်လောက်လဲ?'
     ],
     quickReplies: [
-      'ဟုတ်ကဲ့ရှင်! ရန်ကုန်၊ မန္တလေးနှင့် မြို့ကြီးများအားလုံး အိမ်ရောက်ငွေချေ (Cash on Delivery / COD) ဖြင့် မှာယူနိုင်ပါသည်ရှင်။',
-      'iPhone 16 အသင့်ရှိပြီး 1 Year Warranty အပြည့်ပါဝင်ပါသည်ရှင်။'
+      'လောလောဆယ် အိမ်ရောက်ငွေချေ (COD) မရသေးပါခင်ဗျာ။ KBZPay နှင့် WavePay: 09 776 111 116 (Hla Phone Thu) ဖြင့် အရင်ငွေလွှဲပြီး စိတ်ချစွာ မှာယူနိုင်ပါသည်ရှင်။',
+      'ငွေလွှဲအကောင့်: KBZPay / WavePay - 09 776 111 116 (Hla Phone Thu) ဖြစ်ပါသည်ခင်ဗျာ။',
+      'ဆက်သွယ်ရန် Hotline: 09 779 944 100 သို့ တိုက်ရိုက်ခေါ်ဆိုနိုင်ပါသည်ခင်ဗျာ။'
     ]
   }
 };
@@ -780,19 +783,25 @@ export const DEFAULT_BOT_COMMANDS: BotCommand[] = [
   {
     command: '/start',
     description: 'Start shopping and open WebApp Mini App',
-    response: 'Welcome to KO CHO MOBILE E-commerce Store! Tap the button below to browse all phones and electronics directly inside Telegram. အိမ်ရောက်ငွေချေ (COD) ရရှိပါသည်။',
+    response: 'Welcome to KO CHO MOBILE E-commerce Store! Tap the button below to browse all phones and electronics directly inside Telegram. (⚠️ သတိပြုရန် - လောလောဆယ် အိမ်ရောက်ငွေချေ မရသေးပါ၊ KBZPay / WavePay ဖြင့် ငွေလွှဲပေးချေနိုင်ပါသည်)',
+    enabled: true
+  },
+  {
+    command: '/payment',
+    description: 'KPay & WavePay Payment Accounts',
+    response: '💳 ငွေလွှဲအကောင့်များ (COD မရပါ):\n• KBZPay: 09 776 111 116 (Hla Phone Thu)\n• WavePay: 09 776 111 116 (Hla Phone Thu)\n• CB Bank: 0012 6001 8920 1201 (Hla Phone Thu)\n⚠️ လောလောဆယ် အိမ်ရောက်ငွေချေ (COD) မရသေးပါခင်ဗျာ။',
     enabled: true
   },
   {
     command: '/cod',
     description: 'Cash on Delivery Information',
-    response: '✅ အိမ်ရောက်ငွေချေ (COD) စနစ်ဖြင့် ရန်ကုန်၊ မန္တလေးနှင့် နယ်မြို့များအားလုံးသို့ ပို့ဆောင်ပေးနေပါပြီ။ ပစ္စည်းရောက်မှ ငွေချေနိုင်ပါသည်။',
+    response: '⚠️ လောလောဆယ် အိမ်ရောက်ငွေချေ (Cash on Delivery / COD) စနစ် မရသေးပါခင်ဗျာ။ လူကြီးမင်းတို့အနေဖြင့် KBZPay / WavePay (09 776 111 116 - Hla Phone Thu) ဖြင့် ကြိုတင်ငွေလွှဲ၍ မှာယူနိုင်ပါသည်။',
     enabled: true
   },
   {
     command: '/products',
     description: 'Browse all available in-stock items',
-    response: 'Available Brands: iPhone, Xiaomi/Redmi, OPPO, Vivo, Huawei/Honor, Samsung, Realme, Tecno, ROG Gaming. Prices in MMK.',
+    response: 'Available Brands: iPhone, Xiaomi/Redmi, OPPO, Vivo, Huawei/Honor, Samsung, Realme, Tecno, ROG Gaming. Prices in MMK. (COD မရသေးပါ၊ KPay/WavePay: 09 776 111 116 ဖြင့် ငွေလွှဲရပါမည်)',
     enabled: true
   },
   {
@@ -804,7 +813,7 @@ export const DEFAULT_BOT_COMMANDS: BotCommand[] = [
   {
     command: '/contact',
     description: 'Direct contact with Shop Owner / Support',
-    response: 'Customer Service Hotline: 09 798 442 190 | Telegram Admin: @kocho_admin',
+    response: 'Customer Service Hotline: 09 779 944 100 | Telegram Admin: @player_00h',
     enabled: true
   }
 ];
